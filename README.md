@@ -1,6 +1,8 @@
 # ESA_Extended
 The Extended Electrographic Seizure Analyzer is a modified version of the Electrographic Seizure Analyzer first developed by the Krook-Magnuson lab at the University of Minnesota.
 
+The Extended Electrographic Seizure Analyzer has been developed and tested in collaboration with the Binder Lab at University of California, Riverside.
+
 ## Additional Features
 - Custom channel selection for channel-level analysis
 	- Display of 4 channels at a time in GUI
@@ -20,7 +22,6 @@ The following external libraries are used by the Extended ESA:
     - Link: https://sccn.ucsd.edu/eeglab/download.php
 
 # Documentation
-The documentation for the base methods and functionality of the Electrographic Seizure Analyzer can be found at the KM lab public repository within the document entitled *User Guide  Electrographic Seizure Analyzer.pdf*
+The documentation for the base methods and functionality of the Electrographic Seizure Analyzer can be found at the KM lab public repository within the document entitled *User Guide  Electrographic Seizure Analyzer.pdf*.
   - Repository Link: https://github.com/KM-Lab/Electrographic-Seizure-Analyzer 
-
 
