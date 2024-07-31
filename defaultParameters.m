@@ -31,16 +31,16 @@ sctSet.SpikeDetection.nNegSpikeMinDist     = 50;            % dist_neg: negative
 %  * lasts long enough ('min_szre_lngth')   
 %If two events are closer than 'eventglue' (s), make them the same event
 %If two events are only separated by few wide spikes that don't indicate noise, optionally merge them
-sctSet.EventDetection.nMinNumSpikesAsEvent = 4;             % min_nr_spikes: minimum number of spikes to count as event
-sctSet.EventDetection.dMinRollingTimeWin   = 2.0;           % min_szre_windw: min length req for rolling time window 
-sctSet.EventDetection.dMinSeizureLength    = 2.0;           % min_szre_lngth: min length req for seiz evnt 
-sctSet.EventDetection.MergePosNegEvents.Value   = 2;        % (selection of radio button group) deal_with_merge: 
+sctSet.EventDetection.nMinNumSpikesAsEvent = 3;             % min_nr_spikes: minimum number of spikes to count as event
+sctSet.EventDetection.dMinRollingTimeWin   = 1.0;           % min_szre_windw: min length req for rolling time window 
+sctSet.EventDetection.dMinSeizureLength    = 10.0;           % min_szre_lngth: min length req for seiz evnt 
+sctSet.EventDetection.MergePosNegEvents.Value   = 1;        % (selection of radio button group) deal_with_merge: 
                                                                 % 1=union, 2=intersect, 3=positive only, 4=negative only
 sctSet.EventDetection.bConnectEventsCheck  = 1;             % connect_events: attempt to connect events if separated by few dense wide spikes
                                                                 %The wide spikes would have to adhere to spike conditions
                                                                 %0 = don't merge
                                                                 %1 = merge
-sctSet.EventDetection.dGlueEvents          = 2.0;           % eventglue: glue events together if they are less than #s apart
+sctSet.EventDetection.dGlueEvents          = 1.0;           % eventglue: glue events together if they are less than #s apart
 
 switch sctSet.EventDetection.MergePosNegEvents.Value
     case 1;     sctSet.EventDetection.MergePosNegEvents.Selection = 'Union events';   
@@ -54,7 +54,7 @@ end
 %NOTE: More noise settings are automatically added after threshold analysis
 sctSet.NoiseDetection.dIgnoreNoise         = 0.5 * sctSet.EventDetection.dMinRollingTimeWin;    % noisecutoff: delete noise shorter than this (s)
 sctSet.NoiseDetection.dJoinNoise           = 1.0;           % glue_noise: glue noise events together if they are less than #s apart
-sctSet.NoiseDetection.DealWithNoise.Value  = 2;             % (selection of radio button group) deal_with_noise: 
+sctSet.NoiseDetection.DealWithNoise.Value  = 1;             % (selection of radio button group) deal_with_noise: 
                                                                 % 1=ignore all noise, 2=truncate events at noise, 3=ignore noisy events altogether
 sctSet.NoiseDetection.dSlidingWindowSize   = 1.0;           % movingwin(1): Sliding window [size,overlap] in s
 sctSet.NoiseDetection.dSlidingWindowStep   = 0.5;           % movingwin(2): Resolution of noise detection determined by 'size'
