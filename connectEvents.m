@@ -33,9 +33,11 @@ for subject=1:length(posevents)
     
     switch HowToMerge
         case 4
+            temp_events = [];
             %only consider negative events
             events{subject}=negevents{subject};
         case 3
+            temp_events = [];
             %only consider positive events
             events{subject} = posevents{subject};
         case 2
