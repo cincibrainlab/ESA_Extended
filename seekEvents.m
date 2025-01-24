@@ -43,14 +43,14 @@ function [pnPosEvents, pnNegEvents] = seekEvents(pdData, sctInfo, fs, sctSetting
         nsw = sctInfo(subject).Spikes.pnNegSpikesWide;
 
         %Use narrow Spike Information to find Events  
-        pnPosEvents{subject} = Usual_Suspects(psn,samplingRate,sctSetting); %Positive Spike Events
-        pnNegEvents{subject} = Usual_Suspects(nsn,samplingRate,sctSetting); %Negative Spike Events
+        pnPosEvents{subject} = Usual_Suspects(psn,samplingRate,sctSetting, subject); %Positive Spike Events
+        pnNegEvents{subject} = Usual_Suspects(nsn,samplingRate,sctSetting, subject); %Negative Spike Events
 
         %Optional: Try to tape those events that are only separated by few
         %dense wide spikes which otherwise (besides width) follow the criteria
         if sctSetting.EventDetection.bConnectEventsCheck
-            pnPosEvents{subject}=Flagtape(pnPosEvents{subject},posspikes,samplingRate,sctSetting);
-            pnNegEvents{subject}=Flagtape(pnNegEvents{subject},negspikes,samplingRate,sctSetting);
+            pnPosEvents{subject}=Flagtape(pnPosEvents{subject},posspikes,samplingRate,sctSetting, subject);
+            pnNegEvents{subject}=Flagtape(pnNegEvents{subject},negspikes,samplingRate,sctSetting, subject);
         end
     %end  
     %Optional: Display the events in a pop-out figure
@@ -73,7 +73,7 @@ end
 
 
 
-function events = Usual_Suspects(peaks,fs, Settings)
+function events = Usual_Suspects(peaks,fs, Settings, subject)
 %Given a list of peak information, use the user specifications to determine
 %which peaks make an 'event'
 %
@@ -141,7 +141,7 @@ end
     
 
 
-function taped_events = Flagtape(events,allspikes,fs,Settings)
+function taped_events = Flagtape(events,allspikes,fs,Settings, subject)
 %If two events are separated by enough wide spikes to consider them as
 %one single event if they had been narrow spikes, connect them. 
 %Only runs if user picks it as an option in the Settings. 
@@ -219,4 +219,3 @@ function taped_events = Flagtape(events,allspikes,fs,Settings)
     end
 end
     
-

@@ -340,6 +340,3 @@ for subject=1:length(posevents)
     end
 end
 end
-
-
-
