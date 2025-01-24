@@ -394,7 +394,7 @@ function pnNoise = calculateNoise(pdData, sctInfo, fs, sctSettings, nDownSampFac
             pln5=plot(xrange,1.7*dMax*noise5,'.c');                   %noise 5 triggered
             plnn=plot(xrange,1.75*dMax*noisecriteria,'.y','Linewidth',1); %NOISE triggered
 
-            if ~isempty(pnDSNoise)
+            if !isempty(pnDSNoise)
                for i=1:length(pnDSNoise(:,1))
                    plot([pnDSNoise(i,1) pnDSNoise(i,2)],[1.8*dMax 1.8*dMax],'y','LineWidth',2);
                end

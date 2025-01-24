@@ -16,6 +16,7 @@ function sctThresholds = calculateThresholds(pdData, dSampRate, sctSet, DoDispla
 %
 %determine ALL spikes, including the teeny ones
 %pchline=[];cnlline=[];pN=[];nN=[];
+sctThresholds = struct(); % Initialize the output structure
 for i=1:size(pdData,2)
     temp_pdData = pdData(:,i);
     if length(dSampRate) > 1
@@ -122,6 +123,16 @@ for i=1:size(pdData,2)
 
     end
 end
+
+% Write the individual thresholds to an output file
+outputFileName = 'individual_thresholds.txt';
+fileID = fopen(outputFileName, 'w');
+fprintf(fileID, 'Channel\tCutoffAllPeaks\tCutoffPosPeaks\tCutoffNegPeaks\tStdDvAll\tStdDvPos\tStdDvNeg\n');
+for i = 1:size(pdData, 2)
+    fprintf(fileID, '%d\t%f,%f\t%f,%f\t%f,%f\t%f\t%f\t%f\n', i, sctThresholds.CutoffAllPeaks(i,:), sctThresholds.CutoffPosPeaks(i,:), sctThresholds.CutoffNegPeaks(i,:), sctThresholds.StdDvAll(i), sctThresholds.StdDvPos(i), sctThresholds.StdDvNeg(i));
+end
+fclose(fileID);
+
 end
 
 
@@ -196,5 +207,4 @@ function [pdDownSampData, varargout] = downsampleData(pdData, dSampRate)
     end
 
 end
-
 
