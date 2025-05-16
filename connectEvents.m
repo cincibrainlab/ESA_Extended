@@ -113,7 +113,7 @@ for subject=1:length(posevents)
                         %positive event ends.
                         if temp_negevents(i_n,1) <= temp_posevents(i_p,2)
                             %event continues
-                            if negevents(i_n,2) <= temp_posevents(i_p,2)
+                            if temp_negevents(i_n,2) <= temp_posevents(i_p,2)
                                 currentevent='positive';
                                 i_n=i_n+1;
                             else
