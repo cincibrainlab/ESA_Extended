@@ -5,32 +5,32 @@ function [sctHeader, pdData, pdTTL] = rhdConverter(strRHDFile, strSaveDir, bTTL,
 fWaitbar = waitbar(0, 'Converting...', 'Name', 'Converting RHD file...');
 [sctHeader, pdData, pdTTL] = readIntanRHD2000File(strRHDFile, strSaveDir, fWaitbar,subjNumber, numSubjects, numChannels); 
 
-waitbar(0.8, fWaitbar, 'Loading data into EEGLAB modules...');
-addpath(genpath('eeglab13_6_5b')); 
-eeglab_test; 
-load('eeglab_initialization.mat'); 
-
-% [~, strSaveName, ~] = fileparts(strRHDFile); 
-strSaveNameEEG = [strName, '_EEG']; 
-[pdEEGOUT, ~] = EEGLABImportData(strSaveNameEEG, pdData', sctHeader.dSamplingRate); 
-if bTTL
-    strSaveNameTTL = [strName, '_TTL']; 
-    [pdTTLOUT, ~] = EEGLABImportData(strSaveNameTTL, pdTTL', sctHeader.dSamplingRate); 
-end
-
-clear pdEEGforEEGLAB pdTTLforEEGLAB; 
-fprintf('\n');
-
-waitbar(0.9, fWaitbar, 'Saving EDF...');
-strSaveEDFEEG = [strSavePath, '\', strSaveNameEEG, '.edf'];
-EEGLABWriteEEG2edf(pdEEGOUT, strSaveEDFEEG); 
-if bTTL
-    strSaveEDFTTL = [strSavePath, '\', strSaveNameTTL, '.edf'];
-    EEGLABWriteEEG2edf(pdTTLOUT, strSaveEDFTTL); 
-end
-
-rmpath('eeglab13_6_5b'); 
-
+% waitbar(0.8, fWaitbar, 'Loading data into EEGLAB modules...');
+% addpath(genpath('eeglab13_6_5b')); 
+% eeglab_test; 
+% load('eeglab_initialization.mat'); 
+% 
+% % [~, strSaveName, ~] = fileparts(strRHDFile); 
+% strSaveNameEEG = [strName, '_EEG']; 
+% [pdEEGOUT, ~] = EEGLABImportData(strSaveNameEEG, pdData', sctHeader.dSamplingRate); 
+% if bTTL
+%     strSaveNameTTL = [strName, '_TTL']; 
+%     [pdTTLOUT, ~] = EEGLABImportData(strSaveNameTTL, pdTTL', sctHeader.dSamplingRate); 
+% end
+% 
+% clear pdEEGforEEGLAB pdTTLforEEGLAB; 
+% fprintf('\n');
+% 
+% waitbar(0.9, fWaitbar, 'Saving EDF...');
+% strSaveEDFEEG = [strSavePath, '\', strSaveNameEEG, '.edf'];
+% EEGLABWriteEEG2edf(pdEEGOUT, strSaveEDFEEG); 
+% if bTTL
+%     strSaveEDFTTL = [strSavePath, '\', strSaveNameTTL, '.edf'];
+%     EEGLABWriteEEG2edf(pdTTLOUT, strSaveEDFTTL); 
+% end
+% 
+% rmpath('eeglab13_6_5b'); 
+% 
 waitbar(1, fWaitbar, 'Done.'); pause(0.5); 
 delete(fWaitbar);
 

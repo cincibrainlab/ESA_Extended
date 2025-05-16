@@ -28,23 +28,23 @@ sctHeader.dDuration             = record_time;
 
 save(strSave, 'pdData', 't_amplifier', 'sctHeader', '-v7.3');
 
-waitbar(0.8, f, 'Loading data into EEGLAB modules...');
-addpath(genpath('eeglab13_6_5b')); 
-eeglab_test; 
-load('eeglab_initialization.mat'); 
- 
-[strSavePath,strName] = fileparts(strSave);
-strSaveNameEEG = [strName, '_EEG']; 
-[pdEEGOUT, ~] = EEGLABImportData(strSaveNameEEG, pdData', sctHeader.dSamplingRate); 
-
-clear pdEEGforEEGLAB; 
-fprintf('\n');
-
-waitbar(0.9, f, 'Saving EDF...');
-strSaveEDFEEG = [strSavePath, '\', strSaveNameEEG, '.edf'];
-EEGLABWriteEEG2edf(pdEEGOUT, strSaveEDFEEG); 
-
-rmpath('eeglab13_6_5b'); 
+% waitbar(0.8, f, 'Loading data into EEGLAB modules...');
+% addpath(genpath('eeglab13_6_5b')); 
+% eeglab_test; 
+% load('eeglab_initialization.mat'); 
+% 
+% [strSavePath,strName] = fileparts(strSave);
+% strSaveNameEEG = [strName, '_EEG']; 
+% [pdEEGOUT, ~] = EEGLABImportData(strSaveNameEEG, pdData', sctHeader.dSamplingRate); 
+% 
+% clear pdEEGforEEGLAB; 
+% fprintf('\n');
+% 
+% waitbar(0.9, f, 'Saving EDF...');
+% strSaveEDFEEG = [strSavePath, '\', strgetAllegoXDatPriSigsSaveNameEEG, '.edf'];
+% EEGLABWriteEEG2edf(pdEEGOUT, strSaveEDFEEG); 
+% 
+% rmpath('eeglab13_6_5b'); 
 
 waitbar(1, f, 'Done.'); pause(0.5); 
 delete(f);

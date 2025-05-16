@@ -1233,43 +1233,49 @@ W_MAIN = figure('Units','points', ...
 
 % java chat
 eeglab_options;
-if option_chat == 1
+if exist('option_chat', 'var') && option_chat == 1
     if is_sccn
-        disp('Starting chat...');
-        tmpp = fileparts(mywhich('startpane.m'));
-        if isempty(tmpp) || ~ismatlab
-            disp('Cannot start chat');
-            tb = [];
-        else
-            disp(' ----------------------------------- ');
-            disp('| EEGLAB chat 0.9                   |');
-            disp('| The chat currently only works     |'); 
-            disp('| at the University of CA San Diego |');
-            disp(' ----------------------------------- ');
-
-            javaaddpath(fullfile(tmpp, 'Chat_with_pane.jar'));
-            eval('import client.EEGLABchat.*;');
-            eval('import client.VisualToolbar;');
-            eval('import java.awt.*;');
-            eval('import javax.swing.*;');
-
-            try
-                tb = VisualToolbar('137.110.244.26');
-                F = W_MAIN;
-                tb.setPreferredSize(Dimension(0, 75));
-
-                javacomponent(tb,'South',F);
-                javaclose = ['userdat = get(gcbf, ''userdata'');' ...
-                             'try,'...
-                             ' tb = userdat{3};' ...
-                             'clear userdat; delete(gcbf); tb.close; clear tb;'...
-                             'catch,end;'];
-                set(gcf, 'CloseRequestFcn',javaclose);
-
-                refresh(F);
-            catch,
+        % Check if chat functionality exists
+        if exist('startpane.m', 'file')
+            disp('Starting chat...');
+            tmpp = fileparts(mywhich('startpane.m'));
+            if isempty(tmpp) || ~ismatlab
+                disp('Cannot start chat');
                 tb = [];
+            else
+                disp(' ----------------------------------- ');
+                disp('| EEGLAB chat 0.9                   |');
+                disp('| The chat currently only works     |'); 
+                disp('| at the University of CA San Diego |');
+                disp(' ----------------------------------- ');
+
+                javaaddpath(fullfile(tmpp, 'Chat_with_pane.jar'));
+                eval('import client.EEGLABchat.*;');
+                eval('import client.VisualToolbar;');
+                eval('import java.awt.*;');
+                eval('import javax.swing.*;');
+
+                try
+                    tb = VisualToolbar('137.110.244.26');
+                    F = W_MAIN;
+                    tb.setPreferredSize(Dimension(0, 75));
+
+                    javacomponent(tb,'South',F);
+                    javaclose = ['userdat = get(gcbf, ''userdata'');' ...
+                                 'try,'...
+                                 ' tb = userdat{3};' ...
+                                 'clear userdat; delete(gcbf); tb.close; clear tb;'...
+                                 'catch,end;'];
+                    set(gcf, 'CloseRequestFcn',javaclose);
+
+                    refresh(F);
+                catch,
+                    tb = [];
+                end;
             end;
+        else
+            disp('Chat functionality not found');
+            tb = [];
         end;
     else
         tb = [];
